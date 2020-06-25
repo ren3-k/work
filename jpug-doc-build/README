@@ -1,0 +1,7 @@
+
+### build docker image
+docker build -t jpug-doc-build .
+
+### test docker run
+docker run --name jpug-doc --rm -i -t jpug-doc-build bash
+
