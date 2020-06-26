@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  jpug-doc:
+    build:
+      context: ./docker/jpug-doc-build
+    container_name: jpug-doc
+    volumes:
+      - jpug-doc-html:/jpug-doc/doc/src/sgml/html
+
+  nginx:
+    build:
+      context: ./docker/nginx
+    container_name: nginx
+    depends_on:
+      - jpug-doc
+    ports:
+      - '8080:80'
+    volumes:
+      - jpug-doc-html:/usr/share/nginx/html
+
+  fess:
+    build:
+      context: ./docker/fess
+    container_name: fess
+    depends_on:
+      - nginx
+    ports:
+      - '18080:8080'
+
+volumes:
+  jpug-doc-html:
+    driver: "local"
