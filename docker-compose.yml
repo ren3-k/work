@@ -27,6 +27,8 @@ services:
       - nginx
     ports:
       - '18080:8080'
+    environment:
+      - 'ES_JAVA_OPTS="-Xms512m -Xmx2g"'
 
 volumes:
   jpug-doc-html:
